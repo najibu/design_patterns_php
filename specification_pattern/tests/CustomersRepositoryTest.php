@@ -1,4 +1,7 @@
-<?php 
+ <?php 
+
+use Illuminate\Database\Capsule\Manager as DB;
+ 
 
 class CustomersRepositoryTest extends PHPUnit_Framework_TestCase
 {
@@ -6,15 +9,40 @@ class CustomersRepositoryTest extends PHPUnit_Framework_TestCase
 
   public function setUp()
   {
-    $customers = new CustomersRepository(
-        [
-          new Customer('gold'),
-          new Customer('bronze'),
-          new Customer('silver'),
-          new Customer('gold')
-        ]
-    );
+    $this->setUpDatabase();
+
+    $this->migrateTable();
+
+    $this-> customers = new CustomersRepository;
   }
+
+  protected function setUpDatabase()
+  {
+    $database = new DB;
+
+    $database->addConnection([
+      'driver' => 'sqlite',
+      'database' => ':memory:' 
+    ]);
+
+    $database->bootEloquent();
+
+    $database->setAsGlobal();
+  }
+
+  protected function migrateTable()
+  {
+    DB::schema()->create('customers', function($table){
+      $table->increments('id');
+      $table->string('name');
+      $table->string('type');
+      $table->timestamps();
+    });
+
+    Customer::create(['name' => 'Najibu', 'type' => 'gold']);
+    Customer::create(['name' => 'Nsubuga', 'type' => 'silver']);  
+  }
+
     /*
   @test
    */
@@ -22,7 +50,7 @@ class CustomersRepositoryTest extends PHPUnit_Framework_TestCase
   {
     $results = $this->customers->all();
 
-    $this->assertCount(4, $results); 
+    $this->assertCount(2, $results); 
   }
 
   /*
@@ -31,8 +59,8 @@ class CustomersRepositoryTest extends PHPUnit_Framework_TestCase
   function it_fetches_all_customers_who_match_a_given_specification()
   {
    
-    $results = $customers->matchingSpecification(new CustomerIsGold);
+    $results = $this->customers->whoMatch(new CustomerIsGold);
 
-    $this->assertCount(2, $results);
+    $this->assertCount(1, $results);
   }
 }
