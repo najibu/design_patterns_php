@@ -1,66 +1,41 @@
- <?php 
-
-use Illuminate\Database\Capsule\Manager as DB;
- 
+<?php
 
 class CustomersRepositoryTest extends PHPUnit_Framework_TestCase
 {
-  protected $customers;
+    protected $customers;
 
-  public function setUp()
-  {
-    $this->setUpDatabase();
+    public function setUp()
+    {
+        $this->customers =  new CustomersRepository([
+            new Customer('gold'),
+            new Customer('bronze'),
+            new Customer('silver'),
+            new Customer('gold')
+        ]);
+    }
 
-    $this->migrateTable();
+    /** @test */
+    public function it_fetches_all_customers()
+    {
+        $results = $this->customers->all();
 
-    $this-> customers = new CustomersRepository;
-  }
+        $this->assertCount(4, $results);
+    }
 
-  protected function setUpDatabase()
-  {
-    $database = new DB;
+    /** @test */
+    public function it_fetches_all_customers_who_match_a_given_specification()
+    {
+        $customers = new CustomersRepository(
+            [
+                new Customer('gold'),
+                new Customer('bronze'),
+                new Customer('silver'),
+                new Customer('gold')
+            ]
+        );
 
-    $database->addConnection([
-      'driver' => 'sqlite',
-      'database' => ':memory:' 
-    ]);
+        $results = $customers->matchingSpecification(new CustomerIsGold);
 
-    $database->bootEloquent();
-
-    $database->setAsGlobal();
-  }
-
-  protected function migrateTable()
-  {
-    DB::schema()->create('customers', function($table){
-      $table->increments('id');
-      $table->string('name');
-      $table->string('type');
-      $table->timestamps();
-    });
-
-    Customer::create(['name' => 'Najibu', 'type' => 'gold']);
-    Customer::create(['name' => 'Nsubuga', 'type' => 'silver']);  
-  }
-
-    /*
-  @test
-   */
-  function it_fetches_all_customers()
-  {
-    $results = $this->customers->all();
-
-    $this->assertCount(2, $results); 
-  }
-
-  /*
-  @test
-   */
-  function it_fetches_all_customers_who_match_a_given_specification()
-  {
-   
-    $results = $this->customers->whoMatch(new CustomerIsGold);
-
-    $this->assertCount(1, $results);
-  }
+        $this->assertCount(2, $results);
+    }
 }
