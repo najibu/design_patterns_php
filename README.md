@@ -17,7 +17,7 @@ I bet you've used the template method design pattern on multiple occassions with
 <br />
 
 4. Pick a Strategy<br />
-Let's talk about the strategy design pattern and polymorphism. Like many patterns, you may find that you already use this one! 
+Let's talk about the strategy design pattern and polymorphism. Like many patterns, you may find that you already use this one!
 <br />
 
 5. The Chain of Responsibility<br />
@@ -29,10 +29,10 @@ Though certainly not for everything, you may find situations where the specifica
 <br />
 
 7. The Specification Pattern in PHP: Part 2<br />
-Figuring out how to apply this concept to database queries. Let's figure that out, while, in the process and learn how to use (and test) Eloquent outside of Laravel. 
+Figuring out how to apply this concept to database queries. Let's figure that out, while, in the process and learn how to use (and test) Eloquent outside of Laravel.
 <br />
 
-7. Observe This, Fool<br />
+8. Observe This, Fool<br />
 The observer pattern is easily one of the most popular patterns in the bunch. And, luckily, it's one of the easier ones to comprehend.
 <br />
 
