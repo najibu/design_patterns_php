@@ -10,13 +10,11 @@ A decorator allows us to dynamically extend the behaviour of a particular object
 
 2. Gettin' Jiggy With Adapters<br />
 Allows you to translate one interface for use with another.
-
 An adapter is one of the easier design patterns to learn. The reason why is because you use them in the real world all the time!
 <br />
 
 3. The Template Method Pattern<br />
 Useful when worry about code duplication.
-
 I bet you've used the template method design pattern on multiple occasions without even realizing it! This is an easy one to understand.
 <br />
 
@@ -40,9 +38,7 @@ Figuring out how to apply this concept to database queries. Let's figure that ou
 8. Observe This, Fool<br />
 Create a one to many relationship so that when one object changes, its dependencies or observers are immediately notified.
 In that way they can then respond to this event that just occurred.
-
 This gives us a way for objects to notify one another without being linked.
-
 The observer pattern is easily one of the most popular patterns in the bunch. And, luckily, it's one of the easier ones to comprehend.
 <br />
 
