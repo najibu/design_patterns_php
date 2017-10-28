@@ -14,7 +14,7 @@ interface Observer // Subscriber
 }
 
 // ---
-/* Subjec behavior maybe extracted to a trait
+/* Subject behaviour maybe extracted to a trait
  *   to DRY up your code.
 */
 class Login implements Subject
