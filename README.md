@@ -19,6 +19,7 @@ I bet you've used the template method design pattern on multiple occasions witho
 <br />
 
 4. Pick a Strategy<br />
+Defines a family of algorithims encapsulate and make them interchangeable.
 Let's talk about the strategy design pattern and polymorphism. Like many patterns, you may find that you already use this one!
 <br />
 
